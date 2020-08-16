@@ -30,6 +30,7 @@ import config as cf
 import sys
 import csv
 from time import process_time 
+import pytest
 
 def loadCSVFile (file, lst, sep=";"):
     """
@@ -122,7 +123,7 @@ def main():
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/test.csv", lista) #llamar funcion cargar datos
+                loadCSVFile("Data/MoviesCastingRaw-small.csv", lista) #llamar funcion cargar datos
                 print("Datos cargados, "+str(len(lista))+" elementos cargados")
             elif int(inputs[0])==2: #opcion 2
                 if len(lista)==0: #obtener la longitud de la lista
