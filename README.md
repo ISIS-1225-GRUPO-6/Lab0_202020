@@ -1,5 +1,7 @@
 # Proyecto base para los desarrollar los laboratorios
 
+Juan Pablo Hernandez jp.hernandezr1, 201912855
+
 *	ADT: archivos Python con la definición de los Tipos Abstractos de Datos.
 *	App: aplicación Python cliente que usa las ADTs y ordenamientos para dar solución a laboratorios y retos.
 *	Data: archivos con los datos (csv, json, txt, etc) usados en el laboratorio o reto. El contenido de esta carpeta NO se debe versionar.
