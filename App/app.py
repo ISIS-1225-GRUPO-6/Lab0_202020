@@ -115,11 +115,12 @@ def countElementsByCriteria(criteria, column, lst,lst1):
                 for j in range(len(lst)):
                     if int(lst[j]['\ufeffid'])==id and float(lst[j]['vote_average']) >= 6.0:
                         cont+=1
-                        break
-
+                        contador+= float(lst1[j]['vote_average'])
         t1_stop = process_time() #tiempo final
         print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
-    return cont
+        prom=(contador/cont)
+    return("El director tiene"+str(cont)+" peliculas buenas y su calificación media es "+str(prom))
+    
     
 def selcol(resp):
     resp1=''
