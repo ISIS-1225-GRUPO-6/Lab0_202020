@@ -1,6 +1,8 @@
 # Proyecto base para los desarrollar los laboratorios
 
 Juan Pablo Hernandez jp.hernandezr1, 201912855
+Luisa Fernanda Fuentes Ladino l.fuentesl, 202014321
+Carlos Daniel Sarmiento Aguas cd.sarmiento, 202010920
 
 *	ADT: archivos Python con la definición de los Tipos Abstractos de Datos.
 *	App: aplicación Python cliente que usa las ADTs y ordenamientos para dar solución a laboratorios y retos.
