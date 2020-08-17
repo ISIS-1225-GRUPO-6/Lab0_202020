@@ -149,7 +149,6 @@ def menu1():
 def main():
     """
     Método principal del programa, se encarga de manejar todos los metodos adicionales creados
-
     Instancia una lista vacia en la cual se guardarán los datos cargados desde el archivo
     Args: None
     Return: None 
