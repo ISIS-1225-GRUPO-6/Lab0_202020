@@ -31,8 +31,19 @@ import sys
 import csv
 from time import process_time 
 import pytest
+def loadCSVFile (file1,file2, lst,sep=";"):
+    print("Cargando archivo ....")
+    t1_start = process_time() #tiempo inicial
+    dialect = csv.excel()
+    dialect.delimiter=sep
+    lista = [] #instanciar una lista vacia
+    loadFile(file1, lst,sep, dialect)
+    loadFile2 (file2, lst,sep, dialect)
+    t1_stop = process_time() #tiempo final
+    print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
 
-def loadCSVFile (file, lst, sep=";"):
+
+def loadFile (file, lst,sep, dialect):
     """
     Carga un archivo csv a una lista
     Args:
@@ -47,23 +58,28 @@ def loadCSVFile (file, lst, sep=";"):
         Borra la lista e informa al usuario
     Returns: None   
     """
-    del lst[:]
-    print("Cargando archivo ....")
-    t1_start = process_time() #tiempo inicial
-    dialect = csv.excel()
-    dialect.delimiter=sep
+    
     try:
         with open(file, encoding="utf-8") as csvfile:
             spamreader = csv.DictReader(csvfile, dialect=dialect)
             for row in spamreader: 
-                lst.append(row)
+                lst.append(row)        
     except:
         del lst[:]
         print("Se presento un error en la carga del archivo")
     
-    t1_stop = process_time() #tiempo final
-    print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
 
+def loadFile2 (file, lst, sep, dialect):
+    
+    try:
+        with open(file, encoding="utf-8") as csvfile:
+            spamreader = csv.DictReader(csvfile, dialect=dialect)
+            for row in spamreader: 
+                lst.append(row)        
+    except:
+        del lst[:]
+        print("Se presento un error en la carga del archivo")
+    
 def printMenu():
     """
     Imprime el menu de opciones
@@ -73,6 +89,8 @@ def printMenu():
     print("2- Contar los elementos de la Lista")
     print("3- Contar elementos filtrados por palabra clave")
     print("4- Consultar elementos a partir de dos listas")
+    print("5- Consultar películas buenas por director")
+    
     print("0- Salir")
 
 def countElementsFilteredByColumn(criteria, column, lst):
@@ -108,7 +126,8 @@ def countElementsByCriteria(criteria, column, lst):
     """
     return 0
 
-
+def PeliculasBuenas(lista1, lista2, director_name):
+    print(lista1)
 def main():
     """
     Método principal del programa, se encarga de manejar todos los metodos adicionales creados
@@ -123,8 +142,9 @@ def main():
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/MoviesCastingRaw-small.csv", lista) #llamar funcion cargar datos
+                loadCSVFile("Data/MoviesCastingRaw-small.csv", "Data/SmallMoviesDetailsCleaned.csv", lista) #llamar funcion cargar datos               
                 print("Datos cargados, "+str(len(lista))+" elementos cargados")
+                
             elif int(inputs[0])==2: #opcion 2
                 if len(lista)==0: #obtener la longitud de la lista
                     print("La lista esta vacía")    
@@ -137,6 +157,9 @@ def main():
                 criteria =input('Ingrese el criterio de búsqueda\n')
                 counter=countElementsByCriteria(criteria,0,lista)
                 print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
+            elif int(inputs[0])==5: #opcion 5
+                director_name=input('Ingrese el nombre del director:')
+                NumPelisYProm=PeliculasBuenas(lista1,lista2, director_name)
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
 
