@@ -108,19 +108,24 @@ def countElementsByCriteria(criteria, column, lst,lst1):
         return 0
     else:
         t1_start=process_time()
-        contador=0
-        suma=0
+        cont=0
+        suma=0.0
+        prom = 0.0
         for i in range(len(lst1)):
             if lst1[i][column]==criteria:
                 id=int(lst1[i]['id'])
                 for j in range(len(lst)):
                     if int(lst[j]['\ufeffid'])==id and float(lst[j]['vote_average']) >= 6.0:
                         cont+=1
-                        suma+= float(lst1[j]['vote_average'])
+                        suma += float(lst[j]['vote_average'])
+                        break
         t1_stop = process_time() #tiempo final
         print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
-        prom=(suma/cont)
-    return("El director tiene"+str(cont)+" peliculas buenas y su calificación media es "+str(prom))
+        if(cont==0):
+            return "0"
+        else: 
+            prom=(suma/cont)
+    return("El director tiene "+str(cont)+" peliculas buenas y su calificación media es "+str(prom))
     
     
 def selcol(resp):
@@ -176,12 +181,12 @@ def main():
                 columna = selcol(int(resp))
                 criteria =str(input('Ingrese el criterio de búsqueda\n'))
                 counter=countElementsFilteredByColumn(criteria, columna, lista) #filtrar una columna por criterio  
-                print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
+                print("Coinciden ",counter," elementos con el crtierio: ", criteria   )
             elif int(inputs[0])==4: #opcion 4
                 print("en esta opcion te mostraremos la cantidad de peliculas \n  bien calificadas de un autor")
                 criteria =input('Ingrese el criterio de búsqueda , el nombre del autor\n')
                 counter=countElementsByCriteria(criteria,'director_name',lista,lista1)
-                print(counter," elementos con el crtierio: '", criteria ,"' (\n y que tienen una calificacion mayor a 6.0)")
+                print(counter," , mostrando resultados, para el director: '", criteria ,"' (\n estas, que tienen una calificacion mayor a 6.0)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
 
